@@ -120,6 +120,7 @@ const ReportForm: React.FC<ReportFormProps> = ({
                 <td>
                   <select
                     id="trafficDensity"
+                    defaultValue={""}
                     value={trafficDensity}
                     onChange={(e) => setTrafficDensity(e.target.value)}
                   >

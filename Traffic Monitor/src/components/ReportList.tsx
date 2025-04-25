@@ -20,6 +20,7 @@ const ReportList: React.FC = () => {
   const handleDelete = async (id: number) => {
     await deleteReport(id);
     fetchReports().then(setReports);
+    alert("Report deleted successfully!");
   };
 
   const handleEdit = (Report: any) => {
@@ -27,75 +28,67 @@ const ReportList: React.FC = () => {
   };
 
   const handleUpdate = async (id: number, report: any) => {
-    if (
-      report.reportId === "" ||
-      report.reportLocation === "" ||
-      report.trafficDensity === "" ||
-      report.averageSpeed === "" ||
-      report.incidentDetails === ""
-    ) {
-      alert("Please fill in all fields");
-      return;
+    if (report.reportId === id) {
+      alert("Edit: Report ID cannot be the same as before!");
     } else if (report.reportId < 100) {
-      return alert("Report ID must be at least 100!");
+      alert("Edit: Report ID must be at least 100!");
     } else if (
       reports.map((report) => report.reportId).includes(report.reportId)
     ) {
-      return alert("Report ID already exists!");
-    } else if (report.Location === "") {
-      return alert("Report Location cannot be empty!");
-    } else if (report.trafficDensity === "") {
-      return alert("Traffic Density cannot be empty!");
-    } else if (report.averageSpeed === "") {
-      return alert("Average Speed cannot be empty!");
-    } else if (report.incidentDetails === "") {
-      return alert("Incident Details cannot be empty!");
-    }
-
-    try {
-      await updateReport(id, report);
-      fetchReports().then(setReports);
-      setEditingReport(null);
-      alert("Report updated successfully!");
-    } catch (error) {
-      console.error("Error updating report:", error);
-      alert("Error updating report. Please try again.");
+      alert("Edit: Report ID already exists!");
+    } else if (report.Location === "" || report.Location === null) {
+      alert("Edit: Report Location cannot be empty!");
+    } else if (report.trafficDensity === "" || report.trafficDensity === null) {
+      alert("Traffic Density cannot be empty!");
+    } else if (report.averageSpeed === "" || report.averageSpeed === null) {
+      alert("Edit: Average Speed cannot be empty!");
+    } else if (
+      report.incidentDetails === "" ||
+      report.incidentDetails === null
+    ) {
+      alert("Edit: Incident Details cannot be empty!");
+    } else {
+      try {
+        await updateReport(id, report);
+        fetchReports().then(setReports);
+        setEditingReport(null);
+        alert("Report updated successfully!");
+      } catch (error) {
+        console.error("Error updating report:", error);
+        alert("Error updating report. Please try again.");
+      }
     }
   };
 
   const handleCreate = async (report: any) => {
-    if (
-      report.reportId === "" ||
-      report.reportLocation === "" ||
-      report.trafficDensity === "" ||
-      report.averageSpeed === "" ||
-      report.incidentDetails === ""
-    ) {
-      alert("Please fill in all fields");
-      return;
+    if (report.reportId === null) {
+      alert("Report ID cannot be empty!");
     } else if (report.reportId < 100) {
-      return alert("Report ID must be at least 100!");
+      alert("Report ID must be at least 100!");
     } else if (
       reports.map((report) => report.reportId).includes(report.reportId)
     ) {
-      return alert("Report ID already exists!");
-    } else if (report.Location === "") {
-      return alert("Report Location cannot be empty!");
-    } else if (report.trafficDensity === "") {
+      alert("Report ID already exists!");
+    } else if (report.Location === "" || report.Location === null) {
+      alert("Report Location cannot be empty!");
+    } else if (report.trafficDensity === "" || report.trafficDensity === null) {
       return alert("Traffic Density cannot be empty!");
-    } else if (report.averageSpeed === "") {
-      return alert("Average Speed cannot be empty!");
-    } else if (report.incidentDetails === "") {
-      return alert("Incident Details cannot be empty!");
-    }
-
-    try {
-      await createReport(report);
-      fetchReports().then(setReports);
-      alert("Report updated successfully!");
-    } catch (error) {
-      console.error("Error updating report:", error);
-      alert("Error updating report. Please try again.");
+    } else if (report.averageSpeed === "" || report.averageSpeed === null) {
+      alert("Average Speed cannot be empty!");
+    } else if (
+      report.incidentDetails === "" ||
+      report.incidentDetails === null
+    ) {
+      alert("Incident Details cannot be empty!");
+    } else {
+      try {
+        await createReport(report);
+        fetchReports().then(setReports);
+        alert("Report created successfully!");
+      } catch (error) {
+        console.error("Error creating report:", error);
+        alert("Error updating report. Please try again.");
+      }
     }
   };
 
@@ -106,13 +99,17 @@ const ReportList: React.FC = () => {
       const result: any = reports.filter(
         (report) => report.reportId === parseInt(reportId)
       );
-      result.forEach((report: any) => {
-        alert(
-          `Report Found! \n=============================\nReport ID: ${report.reportId} \nReport Location: ${report.reportLocation} \nTraffic Density: ${report.trafficDensity} \nAverage Speed: ${report.averageSpeed} \nIncident Details: ${report.incidentDetails}`
-        );
-      });
+      if (result.length > 0) {
+        result.forEach((report: any) => {
+          alert(
+            `Report Found! \n=============================\nReport ID: ${report.reportId} \nReport Location: ${report.reportLocation} \nTraffic Density: ${report.trafficDensity} \nAverage Speed: ${report.averageSpeed} \nIncident Details: ${report.incidentDetails}`
+          );
+        });
+      } else {
+        alert("No report found with the provided Report ID.");
+      }
     } else {
-      fetchReports().then(setReports);
+      alert("Search: Cancelled!");
     }
   };
 
