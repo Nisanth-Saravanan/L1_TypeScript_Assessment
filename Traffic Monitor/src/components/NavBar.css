@@ -1,0 +1,17 @@
+.navbar-brand,
+.nav-link {
+  color: black !important ;
+}
+
+.navbar-brand:hover,
+.nav-link:hover {
+  color: #ffffff !important ;
+}
+
+.navbar {
+  padding: 20px;
+}
+
+.active {
+  color: #ffffff !important;
+}

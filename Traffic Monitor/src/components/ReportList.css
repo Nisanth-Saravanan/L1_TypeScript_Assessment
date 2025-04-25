@@ -1,0 +1,75 @@
+.user-table {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 600px;
+}
+
+.user-table td {
+  word-wrap: break-word;
+  word-break: break-all;
+  font-size: smaller;
+  padding: 5px;
+}
+
+.edit-button {
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  color: black;
+  background-color: lightblue;
+  transition: transform 0.3s ease;
+  font-size: small;
+}
+
+.edit-button:hover {
+  transform: scale(1.1);
+  color: lightblue;
+  background-color: black;
+}
+
+.delete-button {
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  color: white;
+  background-color: crimson;
+  transition: transform 0.3s ease;
+  font-size: x-small;
+}
+
+.delete-button:hover {
+  transform: scale(1.1);
+  color: crimson;
+  background-color: white;
+}
+
+.search-button {
+  padding: 10px 70px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  color: black;
+  background-color: pink;
+  transition: transform 0.3s ease;
+}
+
+.search-button:hover {
+  transform: scale(1.1);
+  color: pink;
+  background-color: black;
+}
+
+.fader {
+  animation: fade-in 1s forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
